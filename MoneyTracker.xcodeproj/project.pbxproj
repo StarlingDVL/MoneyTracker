@@ -16,6 +16,7 @@
 		2BE2E029285A352700030C4B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2BE2E027285A352700030C4B /* LaunchScreen.storyboard */; };
 		2BE2E031285A366400030C4B /* HistoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE2E030285A366400030C4B /* HistoryTableViewController.swift */; };
 		2BE2E035285A36F300030C4B /* Operation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE2E034285A36F300030C4B /* Operation.swift */; };
+		2BE2E03B285A619500030C4B /* CategoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE2E03A285A619500030C4B /* CategoryCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		2BE2E02A285A352700030C4B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2BE2E030285A366400030C4B /* HistoryTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryTableViewController.swift; sourceTree = "<group>"; };
 		2BE2E034285A36F300030C4B /* Operation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Operation.swift; sourceTree = "<group>"; };
+		2BE2E03A285A619500030C4B /* CategoryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,6 +69,7 @@
 				2BE2E01D285A352400030C4B /* OperationViewController.swift */,
 				2BE2E030285A366400030C4B /* HistoryTableViewController.swift */,
 				2BE2E01F285A352400030C4B /* Main.storyboard */,
+				2BE2E03A285A619500030C4B /* CategoryCollectionViewCell.swift */,
 				2BE2E034285A36F300030C4B /* Operation.swift */,
 				2BE2E025285A352700030C4B /* Assets.xcassets */,
 				2BE2E027285A352700030C4B /* LaunchScreen.storyboard */,
@@ -152,6 +155,7 @@
 				2BE2E01A285A352400030C4B /* AppDelegate.swift in Sources */,
 				2BE2E01C285A352400030C4B /* SceneDelegate.swift in Sources */,
 				2BE2E031285A366400030C4B /* HistoryTableViewController.swift in Sources */,
+				2BE2E03B285A619500030C4B /* CategoryCollectionViewCell.swift in Sources */,
 				2BE2E035285A36F300030C4B /* Operation.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
