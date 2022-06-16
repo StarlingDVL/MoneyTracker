@@ -7,7 +7,7 @@
 
 import UIKit
 
-class OperationViewController: UIViewController, UICollectionViewDataSource {
+class OperationViewController: UIViewController {
     
     @IBOutlet weak var categoryCollectionView: UICollectionView!
     @IBOutlet weak var operationTypeSegmentedControl: UISegmentedControl!
@@ -20,6 +20,47 @@ class OperationViewController: UIViewController, UICollectionViewDataSource {
     private var operations: [Operation] = []
     private var currentCategories: [Category] = []
     private var selectedCategory: Category!
+    
+    
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        switchOperationTypes()
+    }
+
+    @IBAction func selectOperationSegment() {
+        switchOperationTypes()
+    }
+    
+    @IBAction func AddButtonPressed() {
+        guard let sum = sumLabel.text else { return }
+        guard let sumInt = Int(sum) else { return }
+        
+        let operation = Operation(sum: sumInt, category: selectedCategory)
+        operations.insert(operation, at: 0)
+        
+        categoryLabel.text = "Категория"
+        sumLabel.text = "Сумма"
+        showSuccessAlert(for: sumInt, and: selectedCategory.title)
+    }
+    
+    
+    private func switchOperationTypes() {
+        switch operationTypeSegmentedControl.selectedSegmentIndex {
+        case 0:
+            currentCategories = categories.filter { category in
+                category.type == .income
+            }
+        default:
+            currentCategories = categories.filter { category in
+                category.type == .expense
+            }
+        }
+        categoryCollectionView.reloadData()
+    }
+}
+
+extension OperationViewController: UICollectionViewDataSource, UICollectionViewDelegate, UITextFieldDelegate {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         currentCategories.count
@@ -39,35 +80,8 @@ class OperationViewController: UIViewController, UICollectionViewDataSource {
         showAlert(for: currentCategories[indexPath.row])
     }
     
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        switchOperationTypes()
-    }
-
-    @IBAction func selectOperationSegment() {
-        switchOperationTypes()
-    }
-    
-    @IBAction func AddButtonPressed() {
-    }
-    
-    private func switchOperationTypes() {
-        switch operationTypeSegmentedControl.selectedSegmentIndex {
-        case 0:
-            currentCategories = categories.filter { category in
-                category.type == .income
-            }
-        default:
-            currentCategories = categories.filter { category in
-                category.type == .expense
-            }
-        }
-        categoryCollectionView.reloadData()
-    }
-    
     private func showAlert(for category: Category) {
-
+        
         let alert = UIAlertController(title: "Введите сумму", message: "для категории '\(category.title)'", preferredStyle: .alert)
         
         alert.addTextField { textField in
@@ -80,7 +94,7 @@ class OperationViewController: UIViewController, UICollectionViewDataSource {
             
             self.selectedCategory = category
             self.categoryLabel.text = category.title
-            self.sumLabel.text = "\(sum) ₽"
+            self.sumLabel.text = "\(sum)"
         }
         
         let cancelAction = UIAlertAction(title: "Отмена", style: .destructive)
@@ -88,6 +102,14 @@ class OperationViewController: UIViewController, UICollectionViewDataSource {
         alert.addAction(cancelAction)
         alert.addAction(doneAction)
         
+        present(alert, animated: true)
+    }
+    
+    private func showSuccessAlert(for sum: Int, and category: String) {
+        let alert = UIAlertController(title: "Операция успешно добавлена", message: "\(category) на сумму \(sum) ₽", preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "OK", style: .default)
+        
+        alert.addAction(okAction)
         present(alert, animated: true)
     }
     
