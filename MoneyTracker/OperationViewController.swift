@@ -16,16 +16,18 @@ class OperationViewController: UIViewController {
     @IBOutlet weak var sumLabel: UILabel!
     
     private let reuseIdentifier = "categoryCell"
+    
     private let categories: [Category] = Category.getCategories()
     private var operations: [Operation] = []
     private var currentCategories: [Category] = []
+    
     private var selectedCategory: Category!
-    
-    
+    private var balance = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
         switchOperationTypes()
+        title = "Баланс: \(balance) ₽"
     }
 
     @IBAction func selectOperationSegment() {
@@ -41,6 +43,8 @@ class OperationViewController: UIViewController {
         
         categoryLabel.text = "Категория"
         sumLabel.text = "Сумма"
+        
+        calculateBalance(for: operation)
         showSuccessAlert(for: sumInt, and: selectedCategory.title)
     }
     
@@ -57,6 +61,15 @@ class OperationViewController: UIViewController {
             }
         }
         categoryCollectionView.reloadData()
+    }
+    
+    private func calculateBalance(for operation: Operation) {
+        if operation.category.type == .income {
+            balance += operation.sum
+        } else {
+            balance -= operation.sum
+        }
+        title = "Баланс: \(balance) ₽"
     }
 }
 
@@ -82,7 +95,11 @@ extension OperationViewController: UICollectionViewDataSource, UICollectionViewD
     
     private func showAlert(for category: Category) {
         
-        let alert = UIAlertController(title: "Введите сумму", message: "для категории '\(category.title)'", preferredStyle: .alert)
+        let alert = UIAlertController(
+            title: "Введите сумму",
+            message: "для категории '\(category.title)'",
+            preferredStyle: .alert
+        )
         
         alert.addTextField { textField in
             textField.placeholder = "Cумма ₽..."
@@ -106,7 +123,12 @@ extension OperationViewController: UICollectionViewDataSource, UICollectionViewD
     }
     
     private func showSuccessAlert(for sum: Int, and category: String) {
-        let alert = UIAlertController(title: "Операция успешно добавлена", message: "\(category) на сумму \(sum) ₽", preferredStyle: .alert)
+        let alert = UIAlertController(
+            title: "Операция успешно добавлена",
+            message: "\(category) на сумму \(sum) ₽",
+            preferredStyle: .alert
+        )
+        
         let okAction = UIAlertAction(title: "OK", style: .default)
         
         alert.addAction(okAction)
