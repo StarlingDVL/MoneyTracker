@@ -15,21 +15,24 @@ class OperationViewController: UIViewController {
     @IBOutlet weak var categoryLabel: UILabel!
     @IBOutlet weak var sumLabel: UILabel!
     
+    var operations: [Operation] = []
+    
+    // MARK: - Private Properties
     private let reuseIdentifier = "categoryCell"
     
-    private let categories: [Category] = Category.getCategories()
-    private var operations: [Operation] = []
+    var categories: [Category]!
     private var currentCategories: [Category] = []
-    
-    private var selectedCategory: Category!
+    private var selectedCategory: Category?
     private var balance = 0
     
+    // MARK: - View Life Cycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
-        switchOperationTypes()
         title = "Баланс: \(balance) ₽"
+        switchOperationTypes()
     }
-
+    
+    // MARK: - IBActions
     @IBAction func selectOperationSegment() {
         switchOperationTypes()
     }
@@ -37,42 +40,48 @@ class OperationViewController: UIViewController {
     @IBAction func AddButtonPressed() {
         guard let sum = sumLabel.text else { return }
         guard let sumInt = Int(sum) else { return }
-        
-        let operation = Operation(sum: sumInt, category: selectedCategory)
-        operations.insert(operation, at: 0)
+        guard let selectedCategory = selectedCategory else {
+            return
+        }
+
         
         categoryLabel.text = "Категория"
         sumLabel.text = "Сумма"
         
-        calculateBalance(for: operation)
-        showSuccessAlert(for: sumInt, and: selectedCategory.title)
+        StorageManager.shared.saveOperation(sum: sumInt, category: selectedCategory) { operation in
+            showSuccessAlert(for: operation)
+            calculateBalance(for: operation)
+            operations.append(operation)
+        }
+        title = "Баланс: \(balance) ₽"
     }
     
-    
+    // MARK: - Private Methods
     private func switchOperationTypes() {
         switch operationTypeSegmentedControl.selectedSegmentIndex {
         case 0:
             currentCategories = categories.filter { category in
-                category.type == .income
+                !category.isExpense
             }
         default:
             currentCategories = categories.filter { category in
-                category.type == .expense
+                category.isExpense
             }
         }
         categoryCollectionView.reloadData()
     }
     
     private func calculateBalance(for operation: Operation) {
-        if operation.category.type == .income {
-            balance += operation.sum
-        } else {
-            balance -= operation.sum
-        }
-        title = "Баланс: \(balance) ₽"
+            guard let categoryIsExpense = operation.category?.isExpense else { return }
+            
+            if categoryIsExpense {
+                balance -= Int(operation.sum)
+            } else {
+                balance += Int(operation.sum)
+            }
     }
 }
-
+    
 extension OperationViewController: UICollectionViewDataSource, UICollectionViewDelegate, UITextFieldDelegate {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -82,8 +91,8 @@ extension OperationViewController: UICollectionViewDataSource, UICollectionViewD
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! CategoryCollectionViewCell
         
-        cell.categoryImage.image = UIImage(named: currentCategories[indexPath.row].image)
-        cell.categoryImage.backgroundColor = UIColor(named: currentCategories[indexPath.row].color)
+        cell.categoryImage.image = UIImage(data: currentCategories[indexPath.row].image ?? Data())
+        cell.categoryImage.backgroundColor = UIColor(dictionary: currentCategories[indexPath.row].color as! [String : Float])
         cell.categotyTitle.text = currentCategories[indexPath.row].title
         
         return cell
@@ -97,7 +106,7 @@ extension OperationViewController: UICollectionViewDataSource, UICollectionViewD
         
         let alert = UIAlertController(
             title: "Введите сумму",
-            message: "для категории '\(category.title)'",
+            message: "для категории '\(category.title ?? "Неизвестно")'",
             preferredStyle: .alert
         )
         
@@ -122,10 +131,10 @@ extension OperationViewController: UICollectionViewDataSource, UICollectionViewD
         present(alert, animated: true)
     }
     
-    private func showSuccessAlert(for sum: Int, and category: String) {
+    private func showSuccessAlert(for operation: Operation) {
         let alert = UIAlertController(
             title: "Операция успешно добавлена",
-            message: "\(category) на сумму \(sum) ₽",
+            message: "\(operation.category?.title ?? "") на сумму \(operation.sum) ₽",
             preferredStyle: .alert
         )
         
@@ -136,4 +145,3 @@ extension OperationViewController: UICollectionViewDataSource, UICollectionViewD
     }
     
 }
-

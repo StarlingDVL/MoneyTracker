@@ -2,12 +2,14 @@
 //  HistoryTableViewController.swift
 //  MoneyTracker
 //
-//  Created by Юрий Скворцов on 15.06.2022.
+//  Created by Юрий Скворцов on 20.06.2022.
 //
 
 import UIKit
 
 class HistoryTableViewController: UITableViewController {
+    
+    var operations: [Operation]!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -15,23 +17,23 @@ class HistoryTableViewController: UITableViewController {
 
     // MARK: - Table view data source
 
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        return 0
-    }
-
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 0
+        operations.count
     }
 
-    /*
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
-        // Configure the cell...
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        let image = UIImage(data: (operations[indexPath.row].category?.image)!)
+        
+        var content = cell.defaultContentConfiguration()
+        
+        content.text = operations[indexPath.row].category?.title
+        content.image = image
 
         return cell
     }
-    */
+    
 
     /*
     // Override to support conditional editing of the table view.
