@@ -43,6 +43,15 @@ class TrackerTabBarController: UITabBarController {
                 print(error.localizedDescription)
             }
         }
+        
+        StorageManager.shared.fetchOperationData { result in
+            switch result {
+            case .success(let operations):
+                self.operations = operations
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
     }
 
     /*
