@@ -40,7 +40,7 @@ class HistoryTableViewController: UITableViewController {
         content.text = myCell.category?.title
         content.image = image
         content.secondaryText = category.isExpense ? "\(myCell.sum)" : "+\(myCell.sum)"
-        content.secondaryTextProperties.color = category.isExpense ? .darkGray : .systemBlue
+        content.secondaryTextProperties.color = category.isExpense ? .gray : .systemBlue
         content.secondaryTextProperties.font = category.isExpense ? .systemFont(ofSize: 17) : .boldSystemFont(ofSize: 18)
         content.imageProperties.cornerRadius = tableView.rowHeight / 2
         
