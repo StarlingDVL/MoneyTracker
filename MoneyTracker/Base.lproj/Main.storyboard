@@ -5,7 +5,6 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -18,8 +17,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="130-rj-T6I">
-                                <rect key="frame" x="20" y="140" width="374" height="130"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="130-rj-T6I" userLabel="New Operation View">
+                                <rect key="frame" x="20" y="168" width="374" height="130"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Новая операция" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XTQ-yC-dYO">
                                         <rect key="frame" x="8" y="8" width="358" height="36"/>
@@ -54,8 +53,8 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iof-pF-T22">
-                                <rect key="frame" x="20" y="290" width="374" height="260"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iof-pF-T22" userLabel="CategoryView">
+                                <rect key="frame" x="20" y="318" width="374" height="260"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Выберите категорию" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x1n-09-jxe">
                                         <rect key="frame" x="8" y="8" width="358" height="36"/>
@@ -80,30 +79,25 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="160" height="130"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
-                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="oVf-WB-rF8">
-                                                            <rect key="frame" x="10" y="10" width="140" height="89.5"/>
-                                                            <userDefinedRuntimeAttributes>
-                                                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                                    <integer key="value" value="20"/>
-                                                                </userDefinedRuntimeAttribute>
-                                                            </userDefinedRuntimeAttributes>
-                                                        </imageView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nib-95-EYd">
                                                             <rect key="frame" x="8" y="101.5" width="144" height="20.5"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
+                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="oVf-WB-rF8">
+                                                            <rect key="frame" x="35" y="8" width="90" height="91.5"/>
+                                                        </imageView>
                                                     </subviews>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
+                                                        <constraint firstItem="oVf-WB-rF8" firstAttribute="top" secondItem="GAj-8M-caq" secondAttribute="top" constant="8" id="CiS-i7-hDF"/>
                                                         <constraint firstItem="nib-95-EYd" firstAttribute="leading" secondItem="GAj-8M-caq" secondAttribute="leading" constant="8" id="G6B-K6-49b"/>
+                                                        <constraint firstAttribute="trailing" secondItem="oVf-WB-rF8" secondAttribute="trailing" constant="35" id="IKw-2d-aMd"/>
                                                         <constraint firstItem="nib-95-EYd" firstAttribute="top" secondItem="oVf-WB-rF8" secondAttribute="bottom" constant="2" id="KIZ-OW-kyT"/>
-                                                        <constraint firstItem="oVf-WB-rF8" firstAttribute="top" secondItem="GAj-8M-caq" secondAttribute="top" constant="10" id="Mff-94-nYP"/>
-                                                        <constraint firstItem="oVf-WB-rF8" firstAttribute="leading" secondItem="GAj-8M-caq" secondAttribute="leading" constant="10" id="T6j-7k-Sro"/>
                                                         <constraint firstAttribute="trailing" secondItem="nib-95-EYd" secondAttribute="trailing" constant="8" id="TaT-Jw-Ldg"/>
                                                         <constraint firstAttribute="bottom" secondItem="nib-95-EYd" secondAttribute="bottom" constant="8" id="aHz-HW-dTa"/>
-                                                        <constraint firstAttribute="trailing" secondItem="oVf-WB-rF8" secondAttribute="trailing" constant="10" id="aem-gx-iRj"/>
+                                                        <constraint firstItem="oVf-WB-rF8" firstAttribute="leading" secondItem="GAj-8M-caq" secondAttribute="leading" constant="35" id="xwm-uq-WPu"/>
                                                     </constraints>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
@@ -151,7 +145,7 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="Phq-Ys-Aia">
-                                <rect key="frame" x="20" y="572" width="374" height="88"/>
+                                <rect key="frame" x="20" y="598" width="374" height="88"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Информация об операции" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="shs-UK-kIP">
                                         <rect key="frame" x="37.5" y="0.0" width="299" height="30"/>
@@ -180,9 +174,8 @@
                                 </userDefinedRuntimeAttributes>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bfH-ai-2LN">
-                                <rect key="frame" x="20" y="694" width="374" height="44"/>
+                                <rect key="frame" x="20" y="706" width="374" height="44"/>
                                 <color key="backgroundColor" name="cardBackground"/>
-                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Добавить">
                                     <fontDescription key="titleFontDescription" type="system" pointSize="25"/>
@@ -196,28 +189,66 @@
                                     <action selector="AddButtonPressed" destination="BYZ-38-t0r" eventType="touchUpInside" id="ty4-0K-xOx"/>
                                 </connections>
                             </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dgc-Gt-Lac" userLabel="Balance View">
+                                <rect key="frame" x="20" y="64" width="374" height="87"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Баланс" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k6m-Vy-MRH">
+                                        <rect key="frame" x="8" y="8" width="358" height="36"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JcC-Kc-sWX">
+                                        <rect key="frame" x="8" y="49" width="358" height="30"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" name="cardBackground"/>
+                                <constraints>
+                                    <constraint firstItem="k6m-Vy-MRH" firstAttribute="top" secondItem="dgc-Gt-Lac" secondAttribute="top" constant="8" id="C4L-E9-a2W"/>
+                                    <constraint firstAttribute="bottom" secondItem="JcC-Kc-sWX" secondAttribute="bottom" constant="8" id="KTQ-Ii-L2d"/>
+                                    <constraint firstItem="JcC-Kc-sWX" firstAttribute="leading" secondItem="dgc-Gt-Lac" secondAttribute="leading" constant="8" id="W2j-Ag-iDQ"/>
+                                    <constraint firstAttribute="trailing" secondItem="JcC-Kc-sWX" secondAttribute="trailing" constant="8" id="iaK-6b-Ux1"/>
+                                    <constraint firstAttribute="trailing" secondItem="k6m-Vy-MRH" secondAttribute="trailing" constant="8" id="jOM-79-wyt"/>
+                                    <constraint firstItem="k6m-Vy-MRH" firstAttribute="leading" secondItem="dgc-Gt-Lac" secondAttribute="leading" constant="8" id="wyx-fF-tBy"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <integer key="value" value="20"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" name="Background"/>
                         <constraints>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="iof-pF-T22" secondAttribute="trailing" constant="20" id="29V-re-uYl"/>
-                            <constraint firstItem="130-rj-T6I" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="0.145089" id="4Xn-IK-IvR"/>
-                            <constraint firstItem="Phq-Ys-Aia" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="83M-rm-B0m"/>
-                            <constraint firstItem="iof-pF-T22" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="0.290179" id="89r-uu-4NT"/>
-                            <constraint firstItem="Phq-Ys-Aia" firstAttribute="top" secondItem="iof-pF-T22" secondAttribute="bottom" constant="22" id="Am8-TN-oma"/>
-                            <constraint firstItem="bfH-ai-2LN" firstAttribute="top" secondItem="Phq-Ys-Aia" secondAttribute="bottom" constant="34" id="Ay5-3k-qNa"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Phq-Ys-Aia" secondAttribute="trailing" constant="20" id="KbM-Ir-5YR"/>
-                            <constraint firstItem="130-rj-T6I" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="KuM-5f-il9"/>
+                            <constraint firstItem="130-rj-T6I" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="0.145089" id="8Wj-bd-hc2"/>
+                            <constraint firstItem="Phq-Ys-Aia" firstAttribute="top" secondItem="iof-pF-T22" secondAttribute="bottom" constant="20" id="BaO-bb-am0"/>
+                            <constraint firstItem="dgc-Gt-Lac" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="0.0970982" id="FWz-xi-UDA"/>
+                            <constraint firstItem="dgc-Gt-Lac" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="20" id="H2A-YV-Xqd"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="dgc-Gt-Lac" secondAttribute="trailing" constant="20" id="L5d-bW-x5D"/>
                             <constraint firstItem="130-rj-T6I" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="Rmk-C7-Z5c"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Phq-Ys-Aia" secondAttribute="trailing" constant="20" id="V7l-88-wAo"/>
                             <constraint firstItem="iof-pF-T22" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="VxN-4p-U43"/>
+                            <constraint firstItem="iof-pF-T22" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="0.290179" id="VxO-Re-UsH"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="130-rj-T6I" secondAttribute="trailing" constant="20" id="Xgh-r9-Nit"/>
-                            <constraint firstItem="iof-pF-T22" firstAttribute="top" secondItem="130-rj-T6I" secondAttribute="bottom" constant="20" id="eOa-mq-lJL"/>
+                            <constraint firstItem="130-rj-T6I" firstAttribute="top" secondItem="dgc-Gt-Lac" secondAttribute="bottom" constant="17" id="YrU-TV-0ti"/>
+                            <constraint firstItem="iof-pF-T22" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="bJ3-De-pda"/>
+                            <constraint firstItem="Phq-Ys-Aia" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="dvQ-JN-C9V"/>
+                            <constraint firstItem="bfH-ai-2LN" firstAttribute="top" secondItem="Phq-Ys-Aia" secondAttribute="bottom" constant="20" id="e7W-T9-jmn"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="bfH-ai-2LN" secondAttribute="trailing" constant="20" id="fSG-TP-gv5"/>
+                            <constraint firstItem="iof-pF-T22" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="lGO-9x-Nlj"/>
+                            <constraint firstItem="dgc-Gt-Lac" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="tY3-UH-AwH"/>
                             <constraint firstItem="bfH-ai-2LN" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="xSL-B8-lvc"/>
                         </constraints>
                     </view>
+                    <tabBarItem key="tabBarItem" title="Новая операция" image="banknote.fill" catalog="system" id="8HC-i5-pCe"/>
                     <navigationItem key="navigationItem" title="Баланс:" id="zz1-57-rye"/>
                     <connections>
+                        <outlet property="balanceLabel" destination="JcC-Kc-sWX" id="Jd3-RK-RKW"/>
                         <outlet property="categoryCollectionView" destination="z9R-rN-b8C" id="jHT-js-cCH"/>
                         <outlet property="categoryLabel" destination="hI9-H8-XVO" id="8ne-Mp-F0o"/>
                         <outlet property="operationTypeSegmentedControl" destination="eSi-2q-HGe" id="rv4-Vg-pE1"/>
@@ -228,21 +259,37 @@
             </objects>
             <point key="canvasLocation" x="1839.1304347826087" y="81.696428571428569"/>
         </scene>
-        <!--Root View Controller-->
+        <!--История операций-->
         <scene sceneID="wgS-0a-DU7">
             <objects>
                 <tableViewController id="G26-rR-djX" customClass="HistoryTableViewController" customModule="MoneyTracker" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="D7G-uJ-Ubc">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" name="Background"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" id="ywC-Fy-pv5">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" textLabel="z0s-Tu-auf" detailTextLabel="KJv-p7-Vf9" style="IBUITableViewCellStyleValue1" id="ywC-Fy-pv5" customClass="OperationTableViewCell" customModule="MoneyTracker" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="44.5" width="414" height="43.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ywC-Fy-pv5" id="Cfn-Dm-6WL">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="z0s-Tu-auf">
+                                            <rect key="frame" x="20" y="15" width="25" height="14.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="0.0"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="KJv-p7-Vf9">
+                                            <rect key="frame" x="361" y="15" width="33" height="14.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="0.0"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
                                 </tableViewCellContentView>
                             </tableViewCell>
                         </prototypes>
@@ -251,7 +298,7 @@
                             <outlet property="delegate" destination="G26-rR-djX" id="dmg-gS-T1H"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Root View Controller" id="wXn-4v-TNR"/>
+                    <navigationItem key="navigationItem" title="История операций" id="wXn-4v-TNR"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cwr-J0-yu5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -267,8 +314,8 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
                     <connections>
-                        <segue destination="e4X-3q-BDf" kind="relationship" relationship="viewControllers" id="CJY-xM-CfP"/>
-                        <segue destination="Jax-9r-Ben" kind="relationship" relationship="viewControllers" id="cR5-Us-OHa"/>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="viewControllers" id="qae-i9-9fM"/>
+                        <segue destination="Jax-9r-Ben" kind="relationship" relationship="viewControllers" id="448-g9-TGs"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2gg-KG-G6e" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -284,6 +331,7 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" largeTitles="YES" id="ERv-OK-cFf">
                         <rect key="frame" x="0.0" y="44" width="414" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" name="Background"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
@@ -293,25 +341,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="O5t-5t-v7f" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2755.072463768116" y="81.696428571428569"/>
-        </scene>
-        <!--Новая операция-->
-        <scene sceneID="M3l-fe-j0U">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="e4X-3q-BDf" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Новая операция" image="banknote.fill" catalog="system" id="mXn-XH-hWd"/>
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" largeTitles="YES" id="c3o-7l-qFm">
-                        <rect key="frame" x="0.0" y="44" width="414" height="96"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="QU3-R8-BKX"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="OfC-iy-7XQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="928.98550724637687" y="81.696428571428569"/>
         </scene>
     </scenes>
     <resources>
@@ -326,8 +355,5 @@
         <namedColor name="cardBackground">
             <color red="0.41960784313725491" green="0.72549019607843135" blue="0.94117647058823528" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
     </resources>
 </document>

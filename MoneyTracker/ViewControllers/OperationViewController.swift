@@ -9,30 +9,39 @@ import UIKit
 
 class OperationViewController: UIViewController {
     
+    // MARK: - IBOutlets
+    
     @IBOutlet weak var categoryCollectionView: UICollectionView!
     @IBOutlet weak var operationTypeSegmentedControl: UISegmentedControl!
     
+    @IBOutlet weak var balanceLabel: UILabel!
     @IBOutlet weak var categoryLabel: UILabel!
     @IBOutlet weak var sumLabel: UILabel!
     
+    // MARK: - Public Properties
+    
     var operations: [Operation] = []
+    var categories: [Category]!
+    var balance = 0
+    var delegate: TrackerTabBarControllerDelegate!
     
     // MARK: - Private Properties
+    
     private let reuseIdentifier = "categoryCell"
     
-    var categories: [Category]!
     private var currentCategories: [Category] = []
     private var selectedCategory: Category?
-    private var balance = 0
     
     // MARK: - View Life Cycle Methods
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Баланс: \(balance) ₽"
+        balanceLabel.text = "\(balance) ₽"
         switchOperationTypes()
     }
     
     // MARK: - IBActions
+    
     @IBAction func selectOperationSegment() {
         switchOperationTypes()
     }
@@ -43,20 +52,25 @@ class OperationViewController: UIViewController {
         guard let selectedCategory = selectedCategory else {
             return
         }
-
         
         categoryLabel.text = "Категория"
         sumLabel.text = "Сумма"
         
+        StorageManager.shared.saveBalance(sum: !selectedCategory.isExpense ? sumInt : sumInt * -1)
         StorageManager.shared.saveOperation(sum: sumInt, category: selectedCategory) { operation in
             showSuccessAlert(for: operation)
             calculateBalance(for: operation)
             operations.append(operation)
+            delegate.getOperationList(with: operation)
         }
-        title = "Баланс: \(balance) ₽"
+        
+        delegate.getBalance(with: balance)
+        delegate.dataTransfer()
+        balanceLabel.text = "\(balance) ₽"
     }
     
     // MARK: - Private Methods
+    
     private func switchOperationTypes() {
         switch operationTypeSegmentedControl.selectedSegmentIndex {
         case 0:
@@ -82,6 +96,8 @@ class OperationViewController: UIViewController {
     }
 }
     
+// MARK: - Extension for CollectionViewDataSource, CollectionViewDelegate and AlertControllers
+
 extension OperationViewController: UICollectionViewDataSource, UICollectionViewDelegate, UITextFieldDelegate {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -90,9 +106,8 @@ extension OperationViewController: UICollectionViewDataSource, UICollectionViewD
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! CategoryCollectionViewCell
-        
+        cell.contentView.backgroundColor = UIColor(named: "ContentView")
         cell.categoryImage.image = UIImage(data: currentCategories[indexPath.row].image ?? Data())
-        cell.categoryImage.backgroundColor = UIColor(dictionary: currentCategories[indexPath.row].color as! [String : Float])
         cell.categotyTitle.text = currentCategories[indexPath.row].title
         
         return cell
