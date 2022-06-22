@@ -16,7 +16,7 @@ class DataManager {
         if !UserDefaults.standard.bool(forKey: "Done") {
             StorageManager.shared.saveCategory(
                 title: "Перевод",
-                image: convertImageToData(image: UIImage(named: "Перевод") ?? UIImage()),
+                image: convertImageToData(image: UIImage(named: "ПереводР") ?? UIImage()),
                 isExpense: true
             )
             StorageManager.shared.saveCategory(
@@ -146,7 +146,7 @@ class DataManager {
             )
             StorageManager.shared.saveCategory(
                 title: "Перевод",
-                image: convertImageToData(image: UIImage(named: "ПереводР") ?? UIImage()),
+                image: convertImageToData(image: UIImage(named: "Перевод") ?? UIImage()),
                 isExpense: false
             )
             StorageManager.shared.saveCategory(

@@ -9,16 +9,14 @@ import UIKit
 
 class HistoryTableViewController: UITableViewController {
     
+    var balance: Int!
     var operations: [Operation]!
     var delegate: TrackerTabBarControllerDelegate!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.rowHeight = 60
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        StorageManager.shared.fetchData()
+        navigationItem.leftBarButtonItem = editButtonItem
     }
 
     // MARK: - Table view data source
@@ -39,7 +37,7 @@ class HistoryTableViewController: UITableViewController {
         
         content.text = myCell.category?.title
         content.image = image
-        content.secondaryText = category.isExpense ? "\(myCell.sum)" : "+\(myCell.sum)"
+        content.secondaryText = category.isExpense ? "\(myCell.sum)₽" : "+\(myCell.sum)₽"
         content.secondaryTextProperties.color = category.isExpense ? .gray : .systemBlue
         content.secondaryTextProperties.font = category.isExpense ? .systemFont(ofSize: 17) : .boldSystemFont(ofSize: 18)
         content.imageProperties.cornerRadius = tableView.rowHeight / 2
@@ -51,21 +49,15 @@ class HistoryTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        let operation = operations[indexPath.row]
+        
         if editingStyle == .delete {
-            
+            StorageManager.shared.deleteOperation(operation)
+            operations.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
+            delegate.getOperationList(with: operations)
+            delegate.getBalance(with: balance)
+            delegate.dataTransfer()
+        }
     }
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

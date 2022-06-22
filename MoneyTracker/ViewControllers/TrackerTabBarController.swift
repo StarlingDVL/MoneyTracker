@@ -8,9 +8,10 @@
 import UIKit
 
 protocol TrackerTabBarControllerDelegate {
-    func getOperationList(with operation: Operation)
+    func getOperation(with operation: Operation)
     func getBalance(with balance: Int)
     func dataTransfer()
+    func getOperationList(with operations: [Operation])
 }
 
 class TrackerTabBarController: UITabBarController {
@@ -39,18 +40,14 @@ class TrackerTabBarController: UITabBarController {
         StorageManager.shared.fetchOperationData { result in
             switch result {
             case .success(let operations):
-                self.operations = operations
-            case .failure(let error):
-                print(error.localizedDescription)
-            }
-        }
-        
-        StorageManager.shared.fetchBalance { result in
-            switch result {
-            case .success(let amount):
-                for sum in amount {
-                    self.balance += Int(sum.amount)
+                for operation in operations {
+                    if operation.category?.isExpense == true {
+                        self.balance -= Int(operation.sum)
+                    } else {
+                        self.balance += Int(operation.sum)
+                    }
                 }
+                self.operations = operations
             case .failure(let error):
                 print(error.localizedDescription)
             }
@@ -65,8 +62,12 @@ extension TrackerTabBarController: TrackerTabBarControllerDelegate {
         self.balance = balance
     }
     
-    func getOperationList(with operation: Operation) {
+    func getOperation(with operation: Operation) {
         operations.append(operation)
+    }
+    
+    func getOperationList(with operations: [Operation]) {
+        self.operations = operations
     }
     
     func dataTransfer() {
@@ -76,6 +77,7 @@ extension TrackerTabBarController: TrackerTabBarControllerDelegate {
             if let navigationVC = viewController as? UINavigationController {
                 if let historyVC = navigationVC.topViewController as? HistoryTableViewController {
                     historyVC.operations = operations
+                    historyVC.balance = balance
                     historyVC.delegate = self
                     historyVC.tableView.reloadData()
                 }

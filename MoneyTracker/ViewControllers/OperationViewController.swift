@@ -61,7 +61,7 @@ class OperationViewController: UIViewController {
             showSuccessAlert(for: operation)
             calculateBalance(for: operation)
             operations.append(operation)
-            delegate.getOperationList(with: operation)
+            delegate.getOperation(with: operation)
         }
         
         delegate.getBalance(with: balance)
@@ -129,7 +129,7 @@ extension OperationViewController: UICollectionViewDataSource, UICollectionViewD
             textField.placeholder = "Cумма ₽..."
         }
         
-        let doneAction = UIAlertAction(title: "Добавить", style: .default) { action in
+        let doneAction = UIAlertAction(title: "Добавить", style: .default) { _ in
             let textField = alert.textFields?.first
             guard let sum = textField?.text else { return }
             
