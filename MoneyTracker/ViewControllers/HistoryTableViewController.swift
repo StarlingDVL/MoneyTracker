@@ -9,55 +9,50 @@ import UIKit
 
 class HistoryTableViewController: UITableViewController {
     
-    var balance: Int!
-    var operations: [Operation]!
-    var delegate: TrackerTabBarControllerDelegate!
-
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.rowHeight = 60
         navigationItem.leftBarButtonItem = editButtonItem
     }
-
+    
     // MARK: - Table view data source
-
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        operations.count
+        guard let sections = StorageManager.shared.fetchResulController.sections else { return 0 }
+        return sections[section].numberOfObjects
     }
-
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        let myCell = operations[indexPath.row]
+        let operation = StorageManager.shared.fetchResulController.object(at: indexPath)
+        let image = UIImage(data: (operation.category?.image) ?? Data())
         
-        let image = UIImage(data: (myCell.category?.image) ?? Data())
-        guard let category = myCell.category else { return UITableViewCell() }
+        guard let category = operation.category else { return UITableViewCell() }
         
         var content = cell.defaultContentConfiguration()
         
-        content.text = myCell.category?.title
+        content.text = category.title
         content.image = image
-        content.secondaryText = category.isExpense ? "\(myCell.sum)₽" : "+\(myCell.sum)₽"
+        content.secondaryText = category.isExpense ? "\(operation.sum)₽" : "+\(operation.sum)₽"
         content.secondaryTextProperties.color = category.isExpense ? .gray : .systemBlue
         content.secondaryTextProperties.font = category.isExpense ? .systemFont(ofSize: 17) : .boldSystemFont(ofSize: 18)
-        content.imageProperties.cornerRadius = tableView.rowHeight / 2
         
         cell.contentConfiguration = content
         cell.backgroundColor = UIColor(named: "Background")
-
+        
         return cell
     }
-
+    
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        let operation = operations[indexPath.row]
+        let operation = StorageManager.shared.fetchResulController.object(at: indexPath)
         
         if editingStyle == .delete {
             StorageManager.shared.deleteOperation(operation)
-            operations.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
-            delegate.getOperationList(with: operations)
-            delegate.getBalance(with: balance)
-            delegate.dataTransfer()
         }
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+            tableView.deselectRow(at: indexPath, animated: true)
     }
 }

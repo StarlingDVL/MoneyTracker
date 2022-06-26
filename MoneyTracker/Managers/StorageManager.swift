@@ -14,6 +14,24 @@ class StorageManager {
     // MARK: - Core Data Stack
     
     private let context: NSManagedObjectContext
+    var fetchResulController: NSFetchedResultsController<Operation> {
+        let dateSortDescriptor = NSSortDescriptor(key: "date", ascending: false)
+        let fetchRequest = Operation.fetchRequest()
+        
+        fetchRequest.sortDescriptors = [dateSortDescriptor]
+        fetchRequest.fetchBatchSize = 20
+        
+        let controller = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
+        
+        do {
+            try controller.performFetch()
+        } catch let error{
+            print(error)
+        }
+        
+        return controller
+    }
+    
     
     var persistentContainer: NSPersistentContainer = {
         let container = NSPersistentContainer(name: "MoneyTracker")
@@ -52,18 +70,7 @@ class StorageManager {
             completion(.failure(error))
         }
     }
-    
-    func fetchBalance(completion: (Result<[Balance], Error>) -> Void) {
-        let fetchRequest = Balance.fetchRequest()
-        
-        do {
-            let balance = try context.fetch(fetchRequest)
-            completion(.success(balance))
-        } catch let error {
-            completion(.failure(error))
-        }
-    }
-    
+   
     func fetchData() {
         func fetchOperationData(completion: (Result<[Operation], Error>) -> Void) {
             let fetchRequest = Operation.fetchRequest()
@@ -86,17 +93,6 @@ class StorageManager {
                 completion(.failure(error))
             }
         }
-        
-        func fetchBalance(completion: (Result<[Balance], Error>) -> Void) {
-            let fetchRequest = Balance.fetchRequest()
-            
-            do {
-                let balance = try context.fetch(fetchRequest)
-                completion(.success(balance))
-            } catch let error {
-                completion(.failure(error))
-            }
-        }
     }
     
     // MARK: - Saving Methods
@@ -108,12 +104,6 @@ class StorageManager {
         operation.date = Date()
         completion(operation)
         
-        saveContext()
-    }
-    
-    func saveBalance(sum: Int) {
-        let balance = Balance(context: context)
-        balance.amount = Int32(sum)
         saveContext()
     }
     

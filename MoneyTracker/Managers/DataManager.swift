@@ -178,5 +178,4 @@ class DataManager {
         guard let imageData = image.pngData() else { return Data() }
         return imageData
     }
-    
 }

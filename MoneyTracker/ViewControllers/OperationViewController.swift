@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import CoreData
 
 class OperationViewController: UIViewController {
     
@@ -20,7 +21,6 @@ class OperationViewController: UIViewController {
     
     // MARK: - Public Properties
     
-    var operations: [Operation] = []
     var categories: [Category]!
     var balance = 0
     var delegate: TrackerTabBarControllerDelegate!
@@ -28,7 +28,6 @@ class OperationViewController: UIViewController {
     // MARK: - Private Properties
     
     private let reuseIdentifier = "categoryCell"
-    
     private var currentCategories: [Category] = []
     private var selectedCategory: Category?
     
@@ -40,6 +39,21 @@ class OperationViewController: UIViewController {
         switchOperationTypes()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        balance = 0
+        StorageManager.shared.fetchOperationData { result in
+            switch result {
+            case .success(let operations):
+                for operation in operations {
+                    calculateBalance(for: operation)
+                }
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
+        balanceLabel.text = "\(balance) ₽"
+    }
+    
     // MARK: - IBActions
     
     @IBAction func selectOperationSegment() {
@@ -49,23 +63,16 @@ class OperationViewController: UIViewController {
     @IBAction func AddButtonPressed() {
         guard let sum = sumLabel.text else { return }
         guard let sumInt = Int(sum) else { return }
-        guard let selectedCategory = selectedCategory else {
-            return
-        }
+        guard let selectedCategory = selectedCategory else { return }
         
         categoryLabel.text = "Категория"
         sumLabel.text = "Сумма"
         
-        StorageManager.shared.saveBalance(sum: !selectedCategory.isExpense ? sumInt : sumInt * -1)
         StorageManager.shared.saveOperation(sum: sumInt, category: selectedCategory) { operation in
             showSuccessAlert(for: operation)
             calculateBalance(for: operation)
-            operations.append(operation)
-            delegate.getOperation(with: operation)
+            delegate.dataTransfer()
         }
-        
-        delegate.getBalance(with: balance)
-        delegate.dataTransfer()
         balanceLabel.text = "\(balance) ₽"
     }
     
@@ -86,13 +93,13 @@ class OperationViewController: UIViewController {
     }
     
     private func calculateBalance(for operation: Operation) {
-            guard let categoryIsExpense = operation.category?.isExpense else { return }
-            
-            if categoryIsExpense {
-                balance -= Int(operation.sum)
-            } else {
-                balance += Int(operation.sum)
-            }
+        guard let categoryIsExpense = operation.category?.isExpense else { return }
+        
+        if categoryIsExpense {
+            balance -= Int(operation.sum)
+        } else {
+            balance += Int(operation.sum)
+        }
     }
 }
     
@@ -117,6 +124,8 @@ extension OperationViewController: UICollectionViewDataSource, UICollectionViewD
         showAlert(for: currentCategories[indexPath.row])
     }
     
+    // MARK: - AlertControllers
+    
     private func showAlert(for category: Category) {
         
         let alert = UIAlertController(
@@ -127,6 +136,7 @@ extension OperationViewController: UICollectionViewDataSource, UICollectionViewD
         
         alert.addTextField { textField in
             textField.placeholder = "Cумма ₽..."
+            textField.keyboardType = .decimalPad
         }
         
         let doneAction = UIAlertAction(title: "Добавить", style: .default) { _ in
@@ -158,5 +168,4 @@ extension OperationViewController: UICollectionViewDataSource, UICollectionViewD
         alert.addAction(okAction)
         present(alert, animated: true)
     }
-    
 }
