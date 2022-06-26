@@ -60,6 +60,34 @@
 			path = ViewControllers;
 			sourceTree = "<group>";
 		};
+		2B11A7E42868763300B09D74 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				2BE2E01F285A352400030C4B /* Main.storyboard */,
+				2BE2E027285A352700030C4B /* LaunchScreen.storyboard */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		2B11A7E52868765000B09D74 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				2BE2E019285A352400030C4B /* AppDelegate.swift */,
+				2BE2E01B285A352400030C4B /* SceneDelegate.swift */,
+				2BE2E025285A352700030C4B /* Assets.xcassets */,
+				2BE2E02A285A352700030C4B /* Info.plist */,
+			);
+			name = App;
+			sourceTree = "<group>";
+		};
+		2B11A7E62868766D00B09D74 /* CoreDataModels */ = {
+			isa = PBXGroup;
+			children = (
+				2BE2E022285A352400030C4B /* MoneyTracker.xcdatamodeld */,
+			);
+			path = CoreDataModels;
+			sourceTree = "<group>";
+		};
 		2BB0C6222860A99200E33ECC /* Managers */ = {
 			isa = PBXGroup;
 			children = (
@@ -88,15 +116,11 @@
 		2BE2E018285A352400030C4B /* MoneyTracker */ = {
 			isa = PBXGroup;
 			children = (
-				2BE2E019285A352400030C4B /* AppDelegate.swift */,
-				2BE2E01B285A352400030C4B /* SceneDelegate.swift */,
-				2BE2E01F285A352400030C4B /* Main.storyboard */,
+				2B11A7E52868765000B09D74 /* App */,
+				2B11A7E42868763300B09D74 /* Storyboards */,
 				2B0B7F572860BB1200C21D6D /* ViewControllers */,
 				2BB0C6222860A99200E33ECC /* Managers */,
-				2BE2E025285A352700030C4B /* Assets.xcassets */,
-				2BE2E027285A352700030C4B /* LaunchScreen.storyboard */,
-				2BE2E02A285A352700030C4B /* Info.plist */,
-				2BE2E022285A352400030C4B /* MoneyTracker.xcdatamodeld */,
+				2B11A7E62868766D00B09D74 /* CoreDataModels */,
 			);
 			path = MoneyTracker;
 			sourceTree = "<group>";
