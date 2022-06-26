@@ -10,7 +10,6 @@
 		2B0B7F542860BAB600C21D6D /* TrackerTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B0B7F532860BAB600C21D6D /* TrackerTabBarController.swift */; };
 		2B0B7F562860BAE800C21D6D /* HistoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B0B7F552860BAE800C21D6D /* HistoryTableViewController.swift */; };
 		2B6DAFB0285CE59400505FD3 /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B6DAFAF285CE59400505FD3 /* StorageManager.swift */; };
-		2B788EE9285D24D800A07784 /* categories.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2B788EE8285D24D800A07784 /* categories.plist */; };
 		2BB0C6212860A56D00E33ECC /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB0C6202860A56D00E33ECC /* DataManager.swift */; };
 		2BE2E01A285A352400030C4B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE2E019285A352400030C4B /* AppDelegate.swift */; };
 		2BE2E01C285A352400030C4B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE2E01B285A352400030C4B /* SceneDelegate.swift */; };
@@ -26,7 +25,6 @@
 		2B0B7F532860BAB600C21D6D /* TrackerTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackerTabBarController.swift; sourceTree = "<group>"; };
 		2B0B7F552860BAE800C21D6D /* HistoryTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryTableViewController.swift; sourceTree = "<group>"; };
 		2B6DAFAF285CE59400505FD3 /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
-		2B788EE8285D24D800A07784 /* categories.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = categories.plist; sourceTree = "<group>"; };
 		2BB0C6202860A56D00E33ECC /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		2BE2E016285A352400030C4B /* MoneyTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MoneyTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2BE2E019285A352400030C4B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -99,7 +97,6 @@
 				2BE2E027285A352700030C4B /* LaunchScreen.storyboard */,
 				2BE2E02A285A352700030C4B /* Info.plist */,
 				2BE2E022285A352400030C4B /* MoneyTracker.xcdatamodeld */,
-				2B788EE8285D24D800A07784 /* categories.plist */,
 			);
 			path = MoneyTracker;
 			sourceTree = "<group>";
@@ -162,7 +159,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2B788EE9285D24D800A07784 /* categories.plist in Resources */,
 				2BE2E029285A352700030C4B /* LaunchScreen.storyboard in Resources */,
 				2BE2E026285A352700030C4B /* Assets.xcassets in Resources */,
 				2BE2E021285A352400030C4B /* Main.storyboard in Resources */,
